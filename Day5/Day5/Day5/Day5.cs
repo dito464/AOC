@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO.Compression;
 using System.Linq;
 using System.Text;
@@ -74,6 +75,7 @@ namespace Day5
 
         public static long day5SolvePart2(string input)
         {
+            Stopwatch timer = Stopwatch.StartNew();
             List<string> splitInput = input.Split("\r\n\r\nseed-to-soil map:").ToList();
             List<string> seeds = splitInput[0].Remove(0, 6).Split(" ").Where(x => x != "").ToList();
             splitInput = splitInput[1].Split("soil-to-fertilizer map:").ToList();
@@ -123,11 +125,14 @@ namespace Day5
                 }
 
             }
+            timer.Stop();
+            Console.WriteLine($"{timer.ElapsedMilliseconds} ms");
             return min;
         }
 
         public static long mapFinder2(long input,long inputRange, List<string> mapping, out long rangeChanger)
         {
+            
             long result = input;
             bool foundResult = false;
             rangeChanger = inputRange;
